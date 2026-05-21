@@ -1,0 +1,55 @@
+﻿@model List<Post>
+@{
+    ViewData["Title"] = "List Blogs";
+}
+<div class="row">
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class=" d-flex align-items-center justify-content-between">
+                <h2 class="card-title">Your All Blogs</h2>
+                <a asp-action="Create" class="btn btn-info">Add new post</a>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th width="200">Media</th>
+                            <th>Title</th>
+                            <th>Published</th>
+                            <th>Slug</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            @foreach (var post in Model)
+                            {
+                                <tr>
+                                    <td scope="row">
+                                        <img src="@post.Media" alt="@post.Title" asp-append-version="true" class="w-50 align-items-center" />
+                                    </td>
+                                    <td>@post.Title</td>
+                                    <td>@post.PublishedAt</td>
+                                    <td>@post.Status</td>
+                                    <td> <a>Edit</a> | <a>View</a> | <a>Delete</a> </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5">No Post Found!</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
