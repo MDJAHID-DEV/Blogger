@@ -2,17 +2,30 @@
 @{
     ViewData["Title"] = "List Blogs";
 }
+<partial name="../Shared/Common/_PageHeader.cshtml" model='("Your all blogs","Dashboard","/","Blog List")'/>
 <div class="row">
-<div class="col-lg-12">
-    <div class="card">
-        <div class="card-body">
-            <div class=" d-flex align-items-center justify-content-between">
-                <h2 class="card-title">Your All Blogs</h2>
-                <a asp-action="Create" class="btn btn-info">Add new post</a>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
 
-            </div>
+                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 mb-4">
+                    <h2 class="card-title mb-0">Your All Blogs</h2>
 
-            <div class="table-responsive">
+                    <div class="d-flex align-items-center gap-2">
+                        <form asp-action="List" method="get" class="mb-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..." name="searching" >
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="bx bx-search-alt align-middle me-1"></i>Search
+                                </button>
+                            </div>
+                        </form>
+
+                        <a asp-action="Create" class="btn btn-info text-nowrap">Add new post</a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
                 <table class="table mb-0">
                     <thead>
                         <tr>
@@ -26,7 +39,7 @@
                     <tbody>
                         @if (Model.Any())
                         {
-                            @foreach (var post in Model)
+                            @foreach (var post in Model.OrderByDescending(x=>x.CreatedAt))
                             {
                                 <tr>
                                     <td scope="row">
@@ -35,7 +48,7 @@
                                     <td>@post.Title</td>
                                     <td>@post.PublishedAt</td>
                                     <td>@post.Status</td>
-                                    <td> <a>Edit</a> | <a>View</a> | <a>Delete</a> </td>
+                                    <td> <a asp-action="Edit" asp-route-id="@post.Id" >Edit</a> | <a>View</a> | <a>Delete</a> </td>
                                 </tr>
                             }
                         }

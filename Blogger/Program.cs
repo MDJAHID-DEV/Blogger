@@ -1,3 +1,6 @@
+using Blogger.DATA;
+using Microsoft.EntityFrameworkCore;
+
 namespace Blogger
 {
     public class Program
@@ -8,6 +11,7 @@ namespace Blogger
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("db-connection") ?? "BloggerFallbackDb"));
 
             var app = builder.Build();
 
