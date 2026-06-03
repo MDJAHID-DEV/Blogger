@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <h2 class="card-title">Add your blog</h2>
 
                 <form asp-action="Create" method="post" enctype="multipart/form-data">
@@ -13,18 +13,21 @@
                             <div class="mb-3">
                                 <label asp-for="Title"></label>
                                 <input asp-for="Title" class="form-control">
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label asp-for="Slug"></label>
                                 <input asp-for="Slug" class="form-control">
+                                <span asp-validation-for="Slug" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label asp-for="Content"></label>
                                 <textarea asp-for="Content" class="form-control" placeholder="Write Your Blog Here....."></textarea>
+                                <span asp-validation-for="Content" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -34,6 +37,7 @@
                                 <br />
                                 <select class="form-select w-50" asp-for="Status" asp-items="Html.GetEnumSelectList<Status>()" style="padding: 0.47rem 0.75rem;">
                                 </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
 
                             </div>
                         </div>
@@ -50,3 +54,6 @@
 
     </div>
 </div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial.cshtml"/>
+}
